@@ -4,22 +4,35 @@ import java.util.Random;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Lotofacil {
+public class LotofacilGUI {
     public static void main(String[] args) {
-        JFrame frame = new JFrame("Lotofácil");
+        JFrame frame = new JFrame("LotofácilGUI");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(300, 200);
-        frame.setLayout(new GridLayout(4, 1));
+
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 
         JButton btnAposta1 = new JButton("Apostar de 0 a 100");
         JButton btnAposta2 = new JButton("Apostar de A à Z");
         JButton btnAposta3 = new JButton("Apostar em par ou ímpar");
         JButton btnSair = new JButton("Sair");
 
-        frame.add(btnAposta1);
-        frame.add(btnAposta2);
-        frame.add(btnAposta3);
-        frame.add(btnSair);
+        mainPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        mainPanel.add(btnAposta1);
+        mainPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        mainPanel.add(btnAposta2);
+        mainPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        mainPanel.add(btnAposta3);
+        mainPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        mainPanel.add(btnSair);
+
+        frame.add(mainPanel);
+        
+        btnAposta1.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnAposta2.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnAposta3.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnSair.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         btnAposta1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -32,7 +45,6 @@ public class Lotofacil {
                 }
             }
         });
-
         btnAposta2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String input = JOptionPane.showInputDialog(null, "Digite uma letra de A à Z:");
@@ -44,7 +56,6 @@ public class Lotofacil {
                 }
             }
         });
-
         btnAposta3.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String input = JOptionPane.showInputDialog(null, "Digite um número inteiro:");
@@ -56,7 +67,6 @@ public class Lotofacil {
                 }
             }
         });
-
         btnSair.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);
@@ -65,7 +75,6 @@ public class Lotofacil {
 
         frame.setVisible(true);
     }
-
     public static void realizarAposta1(int numeroApostado) {
         Random random = new Random();
         int numeroSorteado = random.nextInt(101);
@@ -78,7 +87,6 @@ public class Lotofacil {
             JOptionPane.showMessageDialog(null, "Que triste! O número sorteado foi: " + numeroSorteado + ".");
         }
     }
-
     public static void realizarAposta2(char letraApostada) {
         char letraPremiada = 'L';
 
@@ -88,7 +96,6 @@ public class Lotofacil {
             JOptionPane.showMessageDialog(null, "Que triste! A letra sorteada foi: " + letraPremiada + ".");
         }
     }
-
     public static void realizarAposta3(int numeroParImpar) {
         if (numeroParImpar % 2 == 0) {
             JOptionPane.showMessageDialog(null, "Você ganhou R$ 100,00 reais.");
